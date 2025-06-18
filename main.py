@@ -87,22 +87,4 @@ sess = g2g.train(gpu_list='0')
 mu1, sigma1 = sess.run([g2g.mu1, g2g.sigma1])
 mu2, sigma2 = sess.run([g2g.mu2, g2g.sigma2])
 
-mu = np.zeros(n)
-for i in range(n):
-    mu[i] = np.linalg.norm(mu1[i]-mu2[i])
-
-y = np.mean(mu)
-
-pre = np.zeros(n,dtype=int)
-for i in range(n):
-    if(mu[i] >= y):
-        pre[i] = 1
-
-with open('label_pre-Farmland-beijing_A.txt', 'w') as f:
-    for i in range(n):
-        f.write(str(pre[i])+'\n')
-
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, cohen_kappa_score
-accuracy = accuracy_score(z, pre)
-kappa = cohen_kappa_score(z, pre)
 
